@@ -340,6 +340,8 @@ later(function()
       end,
     },
   }
+  add { source = 'windwp/nvim-ts-autotag' }
+
   ---@diagnostic disable-next-line: missing-fields
   require('nvim-treesitter.configs').setup {
     ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc' },
@@ -352,6 +354,9 @@ later(function()
       additional_vim_regex_highlighting = { 'ruby' },
     },
     indent = { enable = true, disable = { 'ruby' } },
+    autotag = {
+      enable = true,
+    },
   }
 end)
 
