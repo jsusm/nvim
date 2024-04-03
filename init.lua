@@ -91,10 +91,13 @@ now(function()
 end)
 
 now(function()
-  add {
-    source = 'folke/tokyonight.nvim',
-  }
-  vim.cmd.colorscheme 'tokyonight-night'
+  add { source = 'rose-pine/neovim' }
+  add { source = 'rebelot/kanagawa.nvim' }
+  add { source = 'folke/tokyonight.nvim' }
+  add { source = 'dasupradyumna/midnight.nvim' }
+  add { source = 'luisiacc/gruvbox-baby' }
+
+  vim.cmd.colorscheme 'midnight'
 end)
 
 now(function()
