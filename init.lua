@@ -97,7 +97,10 @@ now(function()
   add { source = 'dasupradyumna/midnight.nvim' }
   add { source = 'luisiacc/gruvbox-baby' }
 
-  vim.cmd.colorscheme 'midnight'
+  vim.g.gruvbox_baby_background_color = dark
+  vim.g.gruvbox_baby_use_original_palette = true
+
+  vim.cmd.colorscheme 'gruvbox-baby'
 end)
 
 now(function()

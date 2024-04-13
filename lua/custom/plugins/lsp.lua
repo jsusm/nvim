@@ -93,6 +93,7 @@ capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp'
 local servers = {
   clangd = {},
   gopls = {},
+  intelephense = {},
   -- pyright = {},
   -- rust_analyzer = {},
   -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
