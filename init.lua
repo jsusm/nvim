@@ -23,33 +23,16 @@ require('mini.deps').setup { path = { package = path_package } }
 
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 
-now(function()
-  require('mini.basics').setup {
-    options = {
-      basic = true,
-      extra_ui = true,
-      win_borders = 'single',
-    },
-    mappings = {
-      basic = true,
-      windows = true,
-      move_with_alt = true,
-    },
-    autocommands = {
-      basic = true,
-      relnum_in_visual_mode = false,
-    },
-  }
-end)
+require('custom.basics').setup()
 
 now(function()
   require('mini.notify').setup()
   vim.notify = require('mini.notify').make_notify()
 end)
 
-now(function()
-  require('mini.tabline').setup()
-end)
+-- now(function()
+--   require('mini.tabline').setup()
+-- end)
 
 now(function()
   -- Status line --
@@ -80,6 +63,7 @@ now(function()
     set_vim_settings = false,
   }
 end)
+
 now(function()
   require('mini.pairs').setup()
 end)
@@ -97,7 +81,7 @@ now(function()
   add { source = 'dasupradyumna/midnight.nvim' }
   add { source = 'luisiacc/gruvbox-baby' }
 
-  vim.g.gruvbox_baby_background_color = dark
+  vim.g.gruvbox_baby_background_color = 'dark'
   vim.g.gruvbox_baby_use_original_palette = true
 
   vim.cmd.colorscheme 'gruvbox-baby'
@@ -109,50 +93,7 @@ end)
 
 now(function()
   -- Which key like interface
-  local miniclue = require 'mini.clue'
-  miniclue.setup {
-    triggers = {
-      -- Leader triggers
-      { mode = 'n', keys = '<Leader>' },
-      { mode = 'x', keys = '<Leader>' },
-
-      -- Built-in completion
-      { mode = 'i', keys = '<C-x>' },
-
-      -- `g` key
-      { mode = 'n', keys = 'g' },
-      { mode = 'x', keys = 'g' },
-
-      -- Marks
-      { mode = 'n', keys = "'" },
-      { mode = 'n', keys = '`' },
-      { mode = 'x', keys = "'" },
-      { mode = 'x', keys = '`' },
-
-      -- Registers
-      { mode = 'n', keys = '"' },
-      { mode = 'x', keys = '"' },
-      { mode = 'i', keys = '<C-r>' },
-      { mode = 'c', keys = '<C-r>' },
-
-      -- Window commands
-      { mode = 'n', keys = '<C-w>' },
-
-      -- `z` key
-      { mode = 'n', keys = 'z' },
-      { mode = 'x', keys = 'z' },
-    },
-
-    clues = {
-      -- Enhance this by adding descriptions for <Leader> mapping groups
-      miniclue.gen_clues.builtin_completion(),
-      miniclue.gen_clues.g(),
-      miniclue.gen_clues.marks(),
-      miniclue.gen_clues.registers(),
-      miniclue.gen_clues.windows(),
-      miniclue.gen_clues.z(),
-    },
-  }
+  require('custom.config.clue')
 end)
 
 now(function()
@@ -297,18 +238,9 @@ later(function()
     source = 'stevearc/conform.nvim',
   }
 
-  require('conform').setup {
+  local conform = require 'conform'
+  conform.setup {
     notify_on_error = false,
-    format_on_save = function(bufnr)
-      -- Disable "format_on_save lsp_fallback" for languages that don't
-      -- have a well standardized coding style. You can add additional
-      -- languages here or re-enable it for the disabled ones.
-      local disable_filetypes = { c = true, cpp = true, typescript = true, typescriptreact = true, javascript = true, javascriptreact = true }
-      return {
-        timeout_ms = 500,
-        lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
-      }
-    end,
     formatters_by_ft = {
       lua = { 'stylua' },
       -- Conform can also run multiple formatters sequentially
@@ -323,6 +255,10 @@ later(function()
       json = { { 'prettierd', 'prettier', 'biome', 'jq' } },
     },
   }
+  vim.keymap.set('n', '<leader>lf', function()
+    conform.format { lsp_fallback = true }
+    print 'hello'
+  end, { desc = 'Format' })
 end)
 
 later(function()
