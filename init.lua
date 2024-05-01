@@ -87,6 +87,11 @@ now(function()
   require('mini.jump2d').setup {}
 end)
 
+now(function()
+  add 'stevearc/dressing.nvim'
+  require('dressing').setup({})
+end)
+
 -- Safely execute later
 later(function()
   require('mini.ai').setup()
