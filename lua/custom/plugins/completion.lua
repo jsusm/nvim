@@ -5,6 +5,8 @@ local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 luasnip.config.setup {}
 
+require('luasnip.loaders.from_vscode').lazy_load()
+
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -18,8 +20,6 @@ cmp.setup {
   --
   -- No, but seriously. Please read `:help ins-completion`, it is really good!
   mapping = cmp.mapping.preset.insert {
-    -- Select the [n]ext item
-    ['<C-n>'] = cmp.mapping.select_next_item(),
     -- Select the [p]revious item
     ['<C-p>'] = cmp.mapping.select_prev_item(),
 
@@ -45,6 +45,7 @@ cmp.setup {
     --
     -- <c-l> will move you to the right of each of the expansion locations.
     -- <c-h> is similar, except moving you backwards.
+    --
     ['<C-l>'] = cmp.mapping(function()
       if luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
@@ -63,5 +64,17 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
+  },
+  sorting = {
+    comparators = {
+      cmp.config.compare.offset,
+      cmp.config.compare.exact,
+      cmp.config.compare.score,
+      require('cmp-under-comparator').under,
+      cmp.config.compare.kind,
+      cmp.config.compare.sort_text,
+      cmp.config.compare.length,
+      cmp.config.compare.order,
+    },
   },
 }
