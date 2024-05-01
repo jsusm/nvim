@@ -39,6 +39,8 @@ now(function()
   require('mini.pairs').setup()
 end)
 
+now(require('custom.plugins.sessions').setup)
+
 now(function()
   -- Add to current session (install if absent)
   add 'nvim-tree/nvim-web-devicons'
