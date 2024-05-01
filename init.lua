@@ -26,6 +26,8 @@ local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 -- basic configurations
 require('custom.basics').setup()
 
+now(require('custom.plugins.starter').setup)
+
 now(function()
   require('mini.notify').setup()
   vim.notify = require('mini.notify').make_notify()
