@@ -10,3 +10,5 @@ I created this config keeping in mind the following features
 - [x] Good colorscheme
 - [x] Debugger support (althoug i don't use it too much)
 - [x] Sessions
+
+This config uses mini.deps for install plugins.
