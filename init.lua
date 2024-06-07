@@ -51,13 +51,44 @@ now(function()
   add { source = 'rose-pine/neovim' }
   add { source = 'rebelot/kanagawa.nvim' }
   add { source = 'folke/tokyonight.nvim' }
-  add { source = 'dasupradyumna/midnight.nvim' }
   add { source = 'luisiacc/gruvbox-baby' }
+  add { source = 'catppuccin/nvim', name = 'catpuccin' }
 
-  vim.g.gruvbox_baby_background_color = 'dark'
+  require('kanagawa').setup {
+    colors = {
+      theme = {
+        all = {
+          ui = {
+            bg_gutter = 'none',
+          },
+        },
+      },
+    },
+  }
+
+  -- vim.g.gruvbox_baby_background_color = 'dark'
   vim.g.gruvbox_baby_use_original_palette = true
 
   vim.cmd.colorscheme 'gruvbox-baby'
+end)
+
+later(function ()
+  add {
+    source = 'rachartier/tiny-devicons-auto-colors.nvim',
+    depends = {
+      'nvim-tree/nvim-web-devicons',
+    },
+  }
+
+  -- local colors = require('catppuccin.palettes').get_palette 'macchiato'
+  -- local colors = require('rose-pine.palette')
+  local colors = require('gruvbox-baby.colors').config()
+  -- local colors = require('tokyonight.colors').setup()
+  -- local colors = require('kanagawa.colors').setup().palette
+
+  require('tiny-devicons-auto-colors').setup {
+    colors = colors,
+  }
 end)
 
 now(function()
