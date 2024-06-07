@@ -16,6 +16,7 @@ M.setup = function()
       starter.sections.sessions(5, true),
     },
     content_hooks = {
+      starter.gen_hook.indexing('all', { 'Sessions' }),
       starter.gen_hook.adding_bullet '» ',
       starter.gen_hook.aligning('center', 'center'),
     },
