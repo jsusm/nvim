@@ -120,7 +120,7 @@ end)
 
 now(function()
   add 'stevearc/dressing.nvim'
-  require('dressing').setup({})
+  require('dressing').setup {}
 end)
 
 -- Safely execute later
