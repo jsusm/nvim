@@ -284,7 +284,7 @@ later(function()
       'leoluz/nvim-dap-go',
     },
   }
-  require('custom.plugins.dap').setup();
+  require('custom.plugins.dap').setup()
 end)
 
 require 'custom.config.keymaps'

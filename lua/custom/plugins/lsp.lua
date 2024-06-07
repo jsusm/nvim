@@ -91,6 +91,8 @@ capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp'
 --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
 --  - settings (table): Override the default settings passed when initializing the server.
 --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+--
+local nvim_lsp = require('lspconfig')
 local servers = {
   clangd = {},
   gopls = {},
@@ -117,6 +119,8 @@ local servers = {
   },
   --
   tsserver = {
+    root_dir = nvim_lsp.util.root_pattern("package.json"),
+    single_file_support = false,
     settings = {
       typescript = {
         inlayHints = {
@@ -163,6 +167,9 @@ local servers = {
       },
     },
   },
+  denols = {
+    root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
+  }
 }
 
 -- Ensure the servers and tools above are installed
