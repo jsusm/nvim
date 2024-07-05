@@ -19,6 +19,7 @@ M.setup = function()
       starter.gen_hook.indexing('all', { 'Sessions' }),
       starter.gen_hook.adding_bullet '» ',
       starter.gen_hook.aligning('center', 'center'),
+      starter.gen_hook.padding(4),
     },
     footer = '\n',
   }
