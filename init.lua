@@ -2,21 +2,24 @@
 -- this config has kickstart as starting point
 
 -- Clone 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
-local path_package = vim.fn.stdpath 'data' .. '/site/'
+local path_package = vim.fn.stdpath('data') .. '/site/'
 local mini_path = path_package .. 'pack/deps/start/mini.nvim'
 if not vim.loop.fs_stat(mini_path) then
-  vim.cmd 'echo "Installing `mini.nvim`" | redraw'
+  vim.cmd('echo "Installing `mini.nvim`" | redraw')
   local clone_cmd = {
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/echasnovski/mini.nvim',
-    mini_path,
+    'git', 'clone', '--filter=blob:none',
+    'https://github.com/echasnovski/mini.nvim', mini_path
   }
   vim.fn.system(clone_cmd)
-  vim.cmd 'packadd mini.nvim | helptags ALL'
-  vim.cmd 'echo "Installed `mini.nvim`" | redraw'
+  vim.cmd('packadd mini.nvim | helptags ALL')
+  vim.cmd('echo "Installed `mini.nvim`" | redraw')
 end
+
+-- Set up 'mini.deps' (customize to your liking)
+require('mini.deps').setup({ path = { package = path_package } })
+
+require('mini.icons').setup()
+
 
 -- Set up 'mini.deps' (customize to your liking)
 require('mini.deps').setup { path = { package = path_package } }
@@ -81,23 +84,23 @@ now(function()
 end)
 
 later(function()
-  add {
-    source = 'rachartier/tiny-devicons-auto-colors.nvim',
-    depends = {
-      'nvim-tree/nvim-web-devicons',
-    },
-  }
-
-  -- local colors = require('catppuccin.palettes').get_palette 'macchiato'
-  -- local colors = require('rose-pine.palette')
-  local colors = require('gruvbox-baby.colors').config()
-  -- local colors = require('tokyonight.colors').setup()
-  -- local colors = require('kanagawa.colors').setup().palette
-  -- local colors = require('zenbones.palette').dark
+  -- add {
+  --   source = 'rachartier/tiny-devicons-auto-colors.nvim',
+  --   depends = {
+  --     'nvim-tree/nvim-web-devicons',
+  --   },
+  -- }
   --
-  require('tiny-devicons-auto-colors').setup {
-    colors = colors,
-  }
+  -- -- local colors = require('catppuccin.palettes').get_palette 'macchiato'
+  -- -- local colors = require('rose-pine.palette')
+  -- local colors = require('gruvbox-baby.colors').config()
+  -- -- local colors = require('tokyonight.colors').setup()
+  -- -- local colors = require('kanagawa.colors').setup().palette
+  -- -- local colors = require('zenbones.palette').dark
+  -- --
+  -- require('tiny-devicons-auto-colors').setup {
+  --   colors = colors,
+  -- }
 end)
 
 now(function()
@@ -120,8 +123,6 @@ now(function()
 
   vim.keymap.set('n', '<leader>f', MiniFiles.open, { desc = 'File Explorer' })
 end)
-
-now(require('custom.plugins.picker').setup)
 
 now(function()
   require('mini.jump2d').setup {}
