@@ -73,11 +73,11 @@ now(function()
   }
 
   -- vim.g.gruvbox_baby_background_color = 'dark'
-  vim.g.gruvbox_baby_use_original_palette = true
+  vim.g.gruvbox_baby_use_original_palette = false
   vim.opt.background = 'dark'
-  vim.g.zenbones = {lightness = 'dim', darkness = 'stark', lighten_noncurrent_window = true}
+  vim.g.zenbones = { lightness = 'dim', darkness = 'stark', lighten_noncurrent_window = true }
 
-  vim.cmd.colorscheme 'zenbones'
+  vim.cmd.colorscheme 'gruvbox-baby'
 end)
 
 later(function()
@@ -90,14 +90,14 @@ later(function()
 
   -- local colors = require('catppuccin.palettes').get_palette 'macchiato'
   -- local colors = require('rose-pine.palette')
-  -- local colors = require('gruvbox-baby.colors').config()
+  local colors = require('gruvbox-baby.colors').config()
   -- local colors = require('tokyonight.colors').setup()
   -- local colors = require('kanagawa.colors').setup().palette
   -- local colors = require('zenbones.palette').dark
   --
-  -- require('tiny-devicons-auto-colors').setup {
-  --   colors = colors,
-  -- }
+  require('tiny-devicons-auto-colors').setup {
+    colors = colors,
+  }
 end)
 
 now(function()
@@ -135,25 +135,9 @@ end)
 -- Safely execute later
 later(function()
   require('mini.ai').setup()
-end)
-
-later(function()
   require('mini.surround').setup()
-end)
-
-later(function()
   require('mini.comment').setup()
-end)
-
-later(function()
-  require('mini.pick').setup()
-end)
-
-later(function()
   require('mini.surround').setup()
-end)
-
-later(function()
   require('mini.bracketed').setup {}
 end)
 
@@ -249,7 +233,6 @@ later(function()
   }
   vim.keymap.set('n', '<leader>lf', function()
     conform.format { lsp_fallback = true }
-    print 'hello'
   end, { desc = 'Format' })
 end)
 

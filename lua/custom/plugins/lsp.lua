@@ -26,23 +26,23 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Jump to the type of the word under your cursor.
     --  Useful when you're not sure what type a variable is and you want to see
     --  the definition of its *type*, not where it was *defined*.
-    map('<leader>D', '<cmd>Pick lsp scope="definition"<cr>', 'Type [D]efinition')
+    map('<leader>lD', '<cmd>Pick lsp scope="definition"<cr>', 'Type [D]efinition')
 
     -- Fuzzy find all the symbols in your current document.
     --  Symbols are things like variables, functions, types, etc.
-    map('<leader>ds', '<cmd>Pick lsp scope="document_symbol"<cr>', '[D]ocument [S]ymbols')
+    map('<leader>ls', '<cmd>Pick lsp scope="document_symbol"<cr>', '[D]ocument [S]ymbols')
 
     -- Fuzzy find all the symbols in your current workspace.
     --  Similar to document symbols, except searches over your entire project.
-    map('<leader>ws', '<cmd>Pick lsp scope="workspace_symbol"<cr>', '[W]orkspace [S]ymbols')
+    map('<leader>lws', '<cmd>Pick lsp scope="workspace_symbol"<cr>', '[W]orkspace [S]ymbols')
 
     -- Rename the variable under your cursor.
     --  Most Language Servers support renaming across files, etc.
-    map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+    map('<leader>lr', vim.lsp.buf.rename, '[R]e[n]ame')
 
     -- Execute a code action, usually your cursor needs to be on top of an error
     -- or a suggestion from your LSP for this to activate.
-    map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+    map('<leader>lc', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
     -- Opens a popup that displays documentation about the word under your cursor
     --  See `:help K` for why this keymap.
@@ -53,7 +53,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
     -- Toggle inlay hints
-    map('<leader>li', '<cmd>InlayHintsToggle<cr>', 'Togg[l]e [I]nlay hints')
+    map('<leader>lil', '<cmd>InlayHintsToggle<cr>', 'Togg[l]e [I]nlay hints')
 
     -- The following two autocommands are used to highlight references of the
     -- word under your cursor when your cursor rests there for a little while.
