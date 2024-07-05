@@ -53,6 +53,12 @@ now(function()
   add { source = 'folke/tokyonight.nvim' }
   add { source = 'luisiacc/gruvbox-baby' }
   add { source = 'catppuccin/nvim', name = 'catpuccin' }
+  add { source = 'cryptomilk/nightcity.nvim' }
+  add { source = 'Verf/deepwhite.nvim' }
+  add { source = 'zootedb0t/citruszest.nvim' }
+  add { source = 'zenbones-theme/zenbones.nvim', depends = {
+    'rktjmp/lush.nvim',
+  } }
 
   require('kanagawa').setup {
     colors = {
@@ -68,11 +74,13 @@ now(function()
 
   -- vim.g.gruvbox_baby_background_color = 'dark'
   vim.g.gruvbox_baby_use_original_palette = true
+  vim.opt.background = 'dark'
+  vim.g.zenbones = {lightness = 'dim', darkness = 'stark', lighten_noncurrent_window = true}
 
-  vim.cmd.colorscheme 'gruvbox-baby'
+  vim.cmd.colorscheme 'zenbones'
 end)
 
-later(function ()
+later(function()
   add {
     source = 'rachartier/tiny-devicons-auto-colors.nvim',
     depends = {
@@ -82,13 +90,14 @@ later(function ()
 
   -- local colors = require('catppuccin.palettes').get_palette 'macchiato'
   -- local colors = require('rose-pine.palette')
-  local colors = require('gruvbox-baby.colors').config()
+  -- local colors = require('gruvbox-baby.colors').config()
   -- local colors = require('tokyonight.colors').setup()
   -- local colors = require('kanagawa.colors').setup().palette
-
-  require('tiny-devicons-auto-colors').setup {
-    colors = colors,
-  }
+  -- local colors = require('zenbones.palette').dark
+  --
+  -- require('tiny-devicons-auto-colors').setup {
+  --   colors = colors,
+  -- }
 end)
 
 now(function()
@@ -288,5 +297,6 @@ later(function()
 end)
 
 require 'custom.config.keymaps'
+require 'custom.config.python'
 
 -- vim: ts=2 sts=2 sw=2 et
