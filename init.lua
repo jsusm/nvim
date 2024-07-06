@@ -27,7 +27,7 @@ require('mini.deps').setup { path = { package = path_package } }
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 
 -- basic configurations
-require('custom.basics').setup()
+require('custom.basics')
 
 now(require('custom.plugins.starter').setup)
 
