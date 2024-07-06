@@ -124,7 +124,23 @@ now(function()
   vim.keymap.set('n', '<leader>f', MiniFiles.open, { desc = 'File Explorer' })
 end)
 
-now(function()
+later(function()
+  require('mini.diff').setup {
+    view = {
+      style = 'sign',
+    },
+  }
+end)
+
+later(function()
+  require('mini.git').setup()
+end)
+
+later(function()
+  require('mini.jump').setup()
+end)
+
+later(function()
   require('mini.jump2d').setup {}
 end)
 
