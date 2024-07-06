@@ -59,4 +59,3 @@ end, { desc = '[G]it [S]earch [M]odified'})
 vim.keymap.set('n', '<leader>gsh', function ()
   extra.pickers.git_hunks()
 end, {desc = '[G]it [S]earch [H]unks'})
-
