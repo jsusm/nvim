@@ -13,7 +13,7 @@ require('mini.bufremove').setup()
 
 vim.keymap.set('n', '<S-l>', '<cmd>bnext<cr>', { desc = 'Move to the next buffer' })
 vim.keymap.set('n', '<S-h>', '<cmd>bprevious<cr>', { desc = 'Move to the previous buffer' })
-vim.keymap.set('n', '<leader>bd', MiniBufremove.delete, {desc = "delete buffer"})
+vim.keymap.set('n', '<leader>bd', MiniBufremove.delete, { desc = 'delete buffer' })
 
 -- Pick things
 local extra = require 'mini.extra'
@@ -33,7 +33,13 @@ vim.keymap.set('n', '<leader>sw', pick.builtin.grep, { desc = '[S]earch current 
 vim.keymap.set('n', '<leader>sg', pick.builtin.grep_live, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', extra.pickers.diagnostic, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sm', extra.pickers.marks, { desc = '[S]earch [M]arks' })
-vim.keymap.set('n', '<leader>sch', extra.pickers.history, { desc = '[S]earch [C]ommand [H]istory'})
+vim.keymap.set('n', '<leader>sch', extra.pickers.history, { desc = '[S]earch [C]ommand [H]istory' })
+
+local function nmap_leader(suffix, rhs, desc, opts)
+  opts = opts or {}
+  opts.desc = desc
+  vim.keymap.set('n', '<Leader>' .. suffix, rhs, opts)
+end
 
 vim.keymap.set('n', '<leader>/', function()
   extra.pickers.buf_lines { scope = 'current' }
@@ -44,18 +50,21 @@ vim.keymap.set('n', '<leader>ss', function()
 end, { desc = '[S]earch in open files' })
 
 -- Git
-vim.keymap.set('n', '<leader>gb', function()
-  extra.pickers.git_branches { scope = 'local' }
-end, { desc = '[G]it [B]ranches' })
+nmap_leader('gb', "<cmd>Pick git_branches scope='local'", "Git Branches")
+nmap_leader('gsc', "<cmd>Pick git_commits", "Search Git Commits")
+nmap_leader('gsm', "<cmd>Pick git_hunks", "Git Search hunks")
+nmap_leader('gsM', "<cmd>Pick git_hunks path='%'", "Git Search hunks")
+nmap_leader('gsa', "<cmd>Pick git_hunks scope='staged'", "Git Search added hunks")
+nmap_leader('gsA', "<cmd>Pick git_hunks path='%' scope='staged'", "Git Search added hunks (current)")
+nmap_leader('gc', "<cmd>Git commit<cr>", "Commit")
+nmap_leader('gC', "<cmd>Git commit --amend<cr>", "Commid amend")
+nmap_leader('gl', "<cmd>Git log --oneline<cr>", "Log")
+nmap_leader('gL', "<cmd>Git log --oneline --follow -- %<cr>", "Log")
+nmap_leader('go', "<cmd>lua MiniDiff.toggle_overlay()<cr>", "Toggle Overlay")
 
-vim.keymap.set('n', '<leader>gc', function ()
-  extra.pickers.git_commits()
-end, { desc = '[G]it [C]ommits'})
+-- Sessions
+local createSession = require('custom.utils').createSession
 
-vim.keymap.set('n', '<leader>gsm', function ()
-  extra.pickers.git_files({ scope = 'modified'})
-end, { desc = '[G]it [S]earch [M]odified'})
-
-vim.keymap.set('n', '<leader>gsh', function ()
-  extra.pickers.git_hunks()
-end, {desc = '[G]it [S]earch [H]unks'})
+nmap_leader('ir', '<cmd>lua MiniSessions.select("read")<cr>', "Read session")
+nmap_leader('id', '<cmd>lua MiniSessions.select("delete")<cr>', "Delete session")
+vim.keymap.set('n', '<leader>in', createSession, { desc = 'Session write' })

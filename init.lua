@@ -2,24 +2,21 @@
 -- this config has kickstart as starting point
 
 -- Clone 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
-local path_package = vim.fn.stdpath('data') .. '/site/'
+local path_package = vim.fn.stdpath 'data' .. '/site/'
 local mini_path = path_package .. 'pack/deps/start/mini.nvim'
 if not vim.loop.fs_stat(mini_path) then
-  vim.cmd('echo "Installing `mini.nvim`" | redraw')
+  vim.cmd 'echo "Installing `mini.nvim`" | redraw'
   local clone_cmd = {
-    'git', 'clone', '--filter=blob:none',
-    'https://github.com/echasnovski/mini.nvim', mini_path
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/echasnovski/mini.nvim',
+    mini_path,
   }
   vim.fn.system(clone_cmd)
-  vim.cmd('packadd mini.nvim | helptags ALL')
-  vim.cmd('echo "Installed `mini.nvim`" | redraw')
+  vim.cmd 'packadd mini.nvim | helptags ALL'
+  vim.cmd 'echo "Installed `mini.nvim`" | redraw'
 end
-
--- Set up 'mini.deps' (customize to your liking)
-require('mini.deps').setup({ path = { package = path_package } })
-
-require('mini.icons').setup()
-
 
 -- Set up 'mini.deps' (customize to your liking)
 require('mini.deps').setup { path = { package = path_package } }
@@ -27,7 +24,7 @@ require('mini.deps').setup { path = { package = path_package } }
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 
 -- basic configurations
-require('custom.basics')
+require 'custom.basics'
 
 now(require('custom.plugins.starter').setup)
 
@@ -42,12 +39,13 @@ now(function()
   require('mini.pairs').setup()
 end)
 
-now(require('custom.plugins.sessions').setup)
+now(function()
+  require('mini.sessions').setup()
+end)
 
 now(function()
-  -- Add to current session (install if absent)
-  add 'nvim-tree/nvim-web-devicons'
-  require('nvim-web-devicons').setup()
+  require('mini.icons').setup()
+  MiniIcons.mock_nvim_web_devicons()
 end)
 
 now(function()
@@ -83,26 +81,6 @@ now(function()
   vim.cmd.colorscheme 'gruvbox-baby'
 end)
 
-later(function()
-  -- add {
-  --   source = 'rachartier/tiny-devicons-auto-colors.nvim',
-  --   depends = {
-  --     'nvim-tree/nvim-web-devicons',
-  --   },
-  -- }
-  --
-  -- -- local colors = require('catppuccin.palettes').get_palette 'macchiato'
-  -- -- local colors = require('rose-pine.palette')
-  -- local colors = require('gruvbox-baby.colors').config()
-  -- -- local colors = require('tokyonight.colors').setup()
-  -- -- local colors = require('kanagawa.colors').setup().palette
-  -- -- local colors = require('zenbones.palette').dark
-  -- --
-  -- require('tiny-devicons-auto-colors').setup {
-  --   colors = colors,
-  -- }
-end)
-
 now(function()
   add { source = 'nvim-lua/plenary.nvim' }
 end)
@@ -110,7 +88,7 @@ end)
 -- Which key like interface
 now(require('custom.plugins.clue').setup)
 
-now(function()
+later(function()
   require('mini.files').setup {
     -- Customization of explorer windows
     windows = {
@@ -160,19 +138,6 @@ end)
 
 later(function()
   add { source = 'tpope/vim-sleuth' } -- Detect tabstop and shiftwidth automatically
-end)
-
-later(function()
-  add { source = 'lewis6991/gitsigns.nvim' }
-  require('gitsigns').setup {
-    signs = {
-      add = { text = '+' },
-      change = { text = '~' },
-      delete = { text = '_' },
-      topdelete = { text = '‾' },
-      changedelete = { text = '~' },
-    },
-  }
 end)
 
 later(function()
