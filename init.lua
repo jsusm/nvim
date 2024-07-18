@@ -263,5 +263,6 @@ end)
 
 require 'custom.config.keymaps'
 require 'custom.config.python'
+require 'custom.autoc'
 
 -- vim: ts=2 sts=2 sw=2 et

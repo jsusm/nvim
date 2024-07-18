@@ -61,6 +61,7 @@ nmap_leader('gC', "<cmd>Git commit --amend<cr>", "Commid amend")
 nmap_leader('gl', "<cmd>Git log --oneline<cr>", "Log")
 nmap_leader('gL', "<cmd>Git log --oneline --follow -- %<cr>", "Log")
 nmap_leader('go', "<cmd>lua MiniDiff.toggle_overlay()<cr>", "Toggle Overlay")
+nmap_leader('gg', "<cmd>term lazygit<cr>", "Open lazygit")
 
 -- Sessions
 local createSession = require('custom.utils').createSession
