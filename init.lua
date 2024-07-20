@@ -54,9 +54,6 @@ now(function()
   add { source = 'folke/tokyonight.nvim' }
   add { source = 'luisiacc/gruvbox-baby' }
   add { source = 'catppuccin/nvim', name = 'catpuccin' }
-  add { source = 'cryptomilk/nightcity.nvim' }
-  add { source = 'Verf/deepwhite.nvim' }
-  add { source = 'zootedb0t/citruszest.nvim' }
   add { source = 'zenbones-theme/zenbones.nvim', depends = {
     'rktjmp/lush.nvim',
   } }
@@ -73,7 +70,7 @@ now(function()
     },
   }
 
-  -- vim.g.gruvbox_baby_background_color = 'dark'
+  vim.g.gruvbox_baby_background_color = 'dark'
   vim.g.gruvbox_baby_use_original_palette = false
   vim.opt.background = 'dark'
   vim.g.zenbones = { lightness = 'dim', darkness = 'stark', lighten_noncurrent_window = true }
