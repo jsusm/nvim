@@ -69,3 +69,10 @@ local createSession = require('custom.utils').createSession
 nmap_leader('ir', '<cmd>lua MiniSessions.select("read")<cr>', "Read session")
 nmap_leader('id', '<cmd>lua MiniSessions.select("delete")<cr>', "Delete session")
 vim.keymap.set('n', '<leader>in', createSession, { desc = 'Session write' })
+
+-- Debugger
+nmap_leader('db', '<cmd>DapToggleBreakpoint<cr>', "Toggle debugger breakpoint")
+nmap_leader('dc', '<cmd>DapContinue<cr>', "Debugger continue")
+nmap_leader('di', '<cmd>DapStepInto<cr>', "Debugger step into")
+nmap_leader('do', '<cmd>DapStepOver<cr>', "Debugger step over")
+nmap_leader('dO', '<cmd>DapStepOut<cr>', "Debugger step out")
