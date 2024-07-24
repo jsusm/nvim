@@ -57,6 +57,7 @@ now(function()
   add { source = 'zenbones-theme/zenbones.nvim', depends = {
     'rktjmp/lush.nvim',
   } }
+  add { source = 'dgox16/oldworld.nvim' }
 
   require('kanagawa').setup {
     colors = {
@@ -75,7 +76,7 @@ now(function()
   vim.opt.background = 'dark'
   vim.g.zenbones = { lightness = 'dim', darkness = 'stark', lighten_noncurrent_window = true }
 
-  vim.cmd.colorscheme 'gruvbox-baby'
+  vim.cmd.colorscheme 'oldworld'
 end)
 
 now(function()

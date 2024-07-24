@@ -1,3 +1,9 @@
+local function nmap_leader(suffix, rhs, desc, opts)
+  opts = opts or {}
+  opts.desc = desc
+  vim.keymap.set('n', '<Leader>' .. suffix, rhs, opts)
+end
+
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
@@ -14,6 +20,11 @@ require('mini.bufremove').setup()
 vim.keymap.set('n', '<S-l>', '<cmd>bnext<cr>', { desc = 'Move to the next buffer' })
 vim.keymap.set('n', '<S-h>', '<cmd>bprevious<cr>', { desc = 'Move to the previous buffer' })
 vim.keymap.set('n', '<leader>bd', MiniBufremove.delete, { desc = 'delete buffer' })
+nmap_leader('tl', '<cmd>tabnext<cr>', "Move to the next tab")
+nmap_leader('th', '<cmd>tabprev<cr>', "Move to the previous tab")
+nmap_leader('tn', '<cmd>tabfind %<cr>', 'Open a new tab width the current buffer')
+nmap_leader('tN', '<cmd>tabnew<cr>', 'Create a new tab')
+nmap_leader('tc', '<cmd>tabclose<cr>', 'Close a tab')
 
 -- Pick things
 local extra = require 'mini.extra'
@@ -33,13 +44,7 @@ vim.keymap.set('n', '<leader>sw', pick.builtin.grep, { desc = '[S]earch current 
 vim.keymap.set('n', '<leader>sg', pick.builtin.grep_live, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', extra.pickers.diagnostic, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sm', extra.pickers.marks, { desc = '[S]earch [M]arks' })
-vim.keymap.set('n', '<leader>sch', extra.pickers.history, { desc = '[S]earch [C]ommand [H]istory' })
-
-local function nmap_leader(suffix, rhs, desc, opts)
-  opts = opts or {}
-  opts.desc = desc
-  vim.keymap.set('n', '<Leader>' .. suffix, rhs, opts)
-end
+vim.keymap.set('n', '<leader>scc', extra.pickers.history, { desc = '[S]earch [C]ommand History' })
 
 vim.keymap.set('n', '<leader>/', function()
   extra.pickers.buf_lines { scope = 'current' }
