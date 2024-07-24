@@ -1,6 +1,10 @@
 local M = {}
 
 M.setup = function()
+  require('mini.tabline').setup{
+    tabpage_section = 'right'
+  }
+
   local active = function()
     local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 500 })
     local git           = MiniStatusline.section_git({ trunc_width = 40 })
